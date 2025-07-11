@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-Back Memory Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="game-card">
+            <h1>N-Back Memory Game</h1>
+            
+            <!-- Setup Screen -->
+            <div id="setup-screen" class="screen">
+                <div class="form-group">
+                    <label for="n-level">N-Back Level (1-5)</label>
+                    <select id="n-level">
+                        <option value="1">1-Back</option>
+                        <option value="2" selected>2-Back</option>
+                        <option value="3">3-Back</option>
+                        <option value="4">4-Back</option>
+                        <option value="5">5-Back</option>
+                    </select>
+                </div>
+                
+                <div class="rules-box">
+                    <h3>Rules:</h3>
+                    <ul>
+                        <li>• First, memorize <span id="n-level-text">2</span> numbers</li>
+                        <li>• When a new number appears, select the number from <span id="n-level-text2">2</span> positions back</li>
+                        <li>• Try to get all 10 questions correct</li>
+                        <li>• Game ends immediately if you make a mistake</li>
+                        <li>• Your score is the time taken to complete all questions</li>
+                    </ul>
+                </div>
+                
+                <div class="example-box">
+                    <h4>Example (2-Back):</h4>
+                    <div class="example-text">
+                        <div>Shows: 3 → Memorize</div>
+                        <div>Shows: 7 → Memorize</div>
+                        <div>Shows: 1 → Select: 3 (2 back)</div>
+                        <div>Shows: 9 → Select: 7 (2 back)</div>
+                        <div>Shows: 5 → Select: 1 (2 back)</div>
+                    </div>
+                </div>
+                
+                <button id="start-game" class="primary-button">
+                    <span>▶</span> Start Game
+                </button>
+            </div>
+            
+            <!-- Memory Phase -->
+            <div id="memory-screen" class="screen hidden">
+                <div class="progress-text" id="memory-progress">Memorize: 1/2</div>
+                <div class="number-display">
+                    <div id="memory-number" class="big-number">0</div>
+                </div>
+                <div class="instruction-text orange">Memorize this number</div>
+            </div>
+            
+            <!-- Game Phase -->
+            <div id="game-screen" class="screen hidden">
+                <div class="progress-text" id="game-progress">Question: 1/8</div>
+                <div class="number-display">
+                    <div id="game-number" class="big-number">0</div>
+                </div>
+                <div class="instruction-text">
+                    Select the number from <span id="n-back-text">2</span> positions back
+                </div>
+                <div class="number-buttons">
+                    <button class="number-btn" data-number="0">0</button>
+                    <button class="number-btn" data-number="1">1</button>
+                    <button class="number-btn" data-number="2">2</button>
+                    <button class="number-btn" data-number="3">3</button>
+                    <button class="number-btn" data-number="4">4</button>
+                    <button class="number-btn" data-number="5">5</button>
+                    <button class="number-btn" data-number="6">6</button>
+                    <button class="number-btn" data-number="7">7</button>
+                    <button class="number-btn" data-number="8">8</button>
+                    <button class="number-btn" data-number="9">9</button>
+                </div>
+            </div>
+            
+            <!-- Result Screen -->
+            <div id="result-screen" class="screen hidden">
+                <h2>Game Over</h2>
+                <div class="result-box">
+                    <div class="result-label">Result</div>
+                    <div id="final-score" class="final-score">Complete! 15.2s (10/10 questions correct)</div>
+                </div>
+                <div class="sequence-box">
+                    <h3>Number Sequence:</h3>
+                    <div id="number-sequence" class="sequence-display">3 7 1 9 5 2 8 4 6 0</div>
+                </div>
+                <button id="play-again" class="secondary-button">
+                    <span>↻</span> Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
